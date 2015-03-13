@@ -6,7 +6,7 @@ var Resolver = require('y-resolver'),
     
     Lock;
 
-Lock = function Lock(n){
+module.exports = Lock = function Lock(n){
   this[resolvers] = [];
   this[available] = n || 1;
 }
@@ -52,7 +52,7 @@ Object.defineProperties(Lock.prototype,{
     this[resolvers].push({
       resolver: resolver,
       n: n
-    }]);
+    });
     
     return resolver.yielded;
   }}

@@ -23,6 +23,9 @@ waitAdd = walk.wrap(function*(t,msg){
 waitAdd(500,'foo');
 waitAdd(100,'bar');
 
-console.log(txt); // foobar
+walk(function*(){
+  yield lock.take();
+  console.log(txt); // foobar
+});
 ```
 
