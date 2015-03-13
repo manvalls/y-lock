@@ -1,13 +1,12 @@
 {
   "name": "y-lock",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Semaphores for the y world",
   "main": "main.js",
   "dependencies": {
     "y-resolver": "",
     "u-su": ""
   },
-  
   "repository": {
     "type": "git",
     "url": "git://github.com/manvalls/y-lock.git"
