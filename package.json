@@ -1,6 +1,6 @@
 {
   "name": "y-lock",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Semaphores for the y world",
   "main": "main.js",
   "dependencies": {
