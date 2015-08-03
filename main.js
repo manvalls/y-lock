@@ -7,8 +7,11 @@ var Resolver = require('y-resolver'),
     Lock;
 
 module.exports = Lock = function Lock(n){
+  if(!arguments.length) n = 1;
+  else n = n >= 0 ? n : 0;
+
   this[resolvers] = [];
-  this[available] = typeof n == 'number' ? n : 1;
+  this[available] = n;
 }
 
 Object.defineProperties(Lock.prototype,{
@@ -16,7 +19,8 @@ Object.defineProperties(Lock.prototype,{
   give: {value: function(n){
     var resolver;
 
-    if(n == null) n = 1;
+    if(!arguments.length) n = 1;
+    else n = n >= 0 ? n : 0;
 
     if(!this[resolvers].length){
       this[available] += n;
@@ -39,9 +43,10 @@ Object.defineProperties(Lock.prototype,{
   take: {value: function(n){
     var resolver = new Resolver();
 
-    if(n == null) n = 1;
-    n -= this[available];
+    if(!arguments.length) n = 1;
+    else n = n >= 0 ? n : 0;
 
+    n -= this[available];
     if(n <= 0){
       this[available] = -n;
       resolver.accept();
