@@ -1,12 +1,12 @@
 var Resolver = require('y-resolver'),
-    Su = require('u-su'),
+    define = require('u-proto/define'),
 
-    resolvers = Su(),
-    available = Su(),
+    resolvers = Symbol(),
+    available = Symbol(),
 
     Lock;
 
-module.exports = Lock = function Lock(n){
+function Lock(n){
   if(!arguments.length) n = 1;
   else n = n >= 0 ? n : 0;
 
@@ -14,9 +14,9 @@ module.exports = Lock = function Lock(n){
   this[available] = n;
 }
 
-Object.defineProperties(Lock.prototype,{
+Lock.prototype[define]({
 
-  give: {value: function(n){
+  give: function(n){
     var resolver;
 
     if(!arguments.length) n = 1;
@@ -38,9 +38,9 @@ Object.defineProperties(Lock.prototype,{
       this.give(-n);
     }
 
-  }},
+  },
 
-  take: {value: function(n){
+  take: function(n){
     var resolver = new Resolver();
 
     if(!arguments.length) n = 1;
@@ -60,6 +60,10 @@ Object.defineProperties(Lock.prototype,{
     });
 
     return resolver.yielded;
-  }}
+  }
 
 });
+
+/*/ exports /*/
+
+module.exports = Lock;
