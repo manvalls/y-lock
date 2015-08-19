@@ -16,7 +16,7 @@ function Lock(n){
 
 Lock.prototype[define]({
 
-  give: function(n){
+  give: function(n,data){
     var resolver;
 
     if(!arguments.length) n = 1;
@@ -33,7 +33,7 @@ Lock.prototype[define]({
       resolver = this[resolvers][0].resolver;
 
       this[resolvers].shift();
-      resolver.accept();
+      resolver.accept(data);
 
       this.give(-n);
     }
