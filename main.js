@@ -18,6 +18,9 @@ Lock.prototype[define]({
     var q = this[queue],
         elem;
 
+    if(!arguments.length) n = 1;
+    else n = fix(n);
+
     if(!q.length){
       this[amount] += n;
       return;
