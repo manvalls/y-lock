@@ -1,68 +1,76 @@
 var Resolver = require('y-resolver'),
     define = require('u-proto/define'),
 
-    resolvers = Symbol(),
-    available = Symbol(),
+    queue = Symbol(),
+    amount = Symbol(),
 
     Lock;
 
 function Lock(n){
   if(!arguments.length) n = 1;
-  else n = n >= 0 ? n : 0;
+  else n = fix(n);
 
-  this[resolvers] = [];
-  this[available] = n;
+  this[queue] = [];
+  this[amount] = n;
 }
 
 Lock.prototype[define]({
 
-  give: function(n,data){
-    var resolver;
+  give: function(n){
+    var q = this[queue],
+        elem;
 
-    if(!arguments.length) n = 1;
-    else n = n >= 0 ? n : 0;
-
-    if(!this[resolvers].length){
-      this[available] += n;
+    if(!s.length){
+      this[amount] += n;
       return;
     }
 
-    this[resolvers][0].n -= n;
-    if(this[resolvers][0].n <= 0){
-      n = this[resolvers][0].n;
-      resolver = this[resolvers][0].resolver;
+    elem = q[0];
+    while(elem && n >= elem[0]){
+      q.shift();
+      n -= elem[0];
 
-      this[resolvers].shift();
-      resolver.accept(data);
-
-      this.give(-n);
+      elem[2].accept(elem[1]);
+      elem = q[0];
     }
+
+    if(!elem){
+      this[amount] += n;
+      return;
+    }
+
+    elem[0] -= n;
 
   },
 
-  take: function(n){
-    var resolver = new Resolver();
+  take: function(n,data){
+    var a = this[amount],
+        res;
 
-    if(!arguments.length) n = 1;
-    else n = n >= 0 ? n : 0;
+    if(typeof n != 'number'){
+      data = n;
+      n = 1;
+    }else n = fix(n);
 
-    n -= this[available];
-    if(n <= 0){
-      this[available] = -n;
-      resolver.accept();
-      return resolver.yielded;
+    if(n <= a){
+      this[amount] -= n;
+      return Resolver.accept(data);
     }
 
-    this[available] = 0;
-    this[resolvers].push({
-      resolver: resolver,
-      n: n
-    });
+    this[amount] = 0;
+    n -= a;
 
-    return resolver.yielded;
+    this[queue].push([n,data,res = new Resolver()]);
+    return res.yielded;
   }
 
 });
+
+// - utils
+
+function fix(n){
+  return n >= 0 ? n : 0;
+}
 
 /*/ exports /*/
 
