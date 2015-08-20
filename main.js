@@ -2,9 +2,7 @@ var Resolver = require('y-resolver'),
     define = require('u-proto/define'),
 
     queue = Symbol(),
-    amount = Symbol(),
-
-    Lock;
+    amount = Symbol();
 
 function Lock(n){
   if(!arguments.length) n = 1;
