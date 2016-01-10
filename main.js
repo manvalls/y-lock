@@ -31,7 +31,7 @@ Lock.prototype[define]({
       q.shift();
       n -= elem[0];
 
-      elem[2].accept(elem[1]);
+      elem[1].accept();
       elem = q[0];
     }
 
@@ -44,7 +44,7 @@ Lock.prototype[define]({
 
   },
 
-  take: function(n,data){
+  take: function(n){
     var a = this[amount],
         res;
 
@@ -55,15 +55,17 @@ Lock.prototype[define]({
 
     if(n <= a){
       this[amount] -= n;
-      return Resolver.accept(data);
+      return Resolver.accept();
     }
 
     this[amount] = 0;
     n -= a;
 
-    this[queue].push([n,data,res = new Resolver()]);
+    this[queue].push([n,res = new Resolver()]);
     return res.yielded;
-  }
+  },
+
+  '3asKNsYzcdGduft': 60
 
 });
 
