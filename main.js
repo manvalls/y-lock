@@ -65,6 +65,27 @@ Lock.prototype[define]({
     return res.yielded;
   },
 
+  capture: function(n){
+    var a = this[amount],
+        res;
+
+    if(typeof n != 'number'){
+      data = n;
+      n = 1;
+    }else n = fix(n);
+
+    if(n <= a){
+      this[amount] -= n;
+      return Resolver.accept();
+    }
+
+    this[amount] = 0;
+    n -= a;
+
+    this[queue].unshift([n,res = new Resolver()]);
+    return res.yielded;
+  },
+
   '3asKNsYzcdGduft': 60
 
 });
