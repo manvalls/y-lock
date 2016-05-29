@@ -4,8 +4,8 @@
   "description": "Semaphores for the y world",
   "main": "main.js",
   "dependencies": {
-    "u-proto": "^5.4.0",
-    "y-resolver": "^6.1.0"
+    "u-proto": "^6.5.0",
+    "y-resolver": "^9.2.2"
   },
   "repository": {
     "type": "git",
