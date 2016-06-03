@@ -48,10 +48,8 @@ Lock.prototype[define]({
     var a = this[amount],
         res;
 
-    if(typeof n != 'number'){
-      data = n;
-      n = 1;
-    }else n = fix(n);
+    if(typeof n != 'number') n = 1;
+    else n = fix(n);
 
     if(n <= a){
       this[amount] -= n;
@@ -69,10 +67,8 @@ Lock.prototype[define]({
     var a = this[amount],
         res;
 
-    if(typeof n != 'number'){
-      data = n;
-      n = 1;
-    }else n = fix(n);
+    if(typeof n != 'number') n = 1;
+    else n = fix(n);
 
     if(n <= a){
       this[amount] -= n;
