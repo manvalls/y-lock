@@ -4,17 +4,17 @@ var Resolver = require('y-resolver'),
     queue = Symbol(),
     amount = Symbol();
 
-function Lock(n){
-  if(!arguments.length) n = 1;
-  else n = fix(n);
+class Lock{
 
-  this[queue] = [];
-  this[amount] = n;
-}
+  constructor(n){
+    if(!arguments.length) n = 1;
+    else n = fix(n);
 
-Lock.prototype[define]({
+    this[queue] = [];
+    this[amount] = n;
+  }
 
-  give: function(n){
+  give(n){
     var q = this[queue],
         elem;
 
@@ -42,9 +42,9 @@ Lock.prototype[define]({
 
     elem[0] -= n;
 
-  },
+  }
 
-  take: function(n){
+  take(n){
     var a = this[amount],
         res;
 
@@ -61,9 +61,9 @@ Lock.prototype[define]({
 
     this[queue].push([n,res = new Resolver()]);
     return res.yielded;
-  },
+  }
 
-  capture: function(n){
+  capture(n){
     var a = this[amount],
         res;
 
@@ -80,11 +80,13 @@ Lock.prototype[define]({
 
     this[queue].unshift([n,res = new Resolver()]);
     return res.yielded;
-  },
+  }
 
-  '3asKNsYzcdGduft': 60
+  get ['3asKNsYzcdGduft'](){
+    return 60;
+  }
 
-});
+}
 
 // - utils
 
