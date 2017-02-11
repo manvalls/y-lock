@@ -1,5 +1,4 @@
 var Resolver = require('y-resolver'),
-    define = require('u-proto/define'),
 
     queue = Symbol(),
     amount = Symbol();
