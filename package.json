@@ -1,6 +1,6 @@
 {
   "name": "y-lock",
-  "version": "3.1.6",
+  "version": "3.2.0",
   "description": "Promise-based semaphore implementation",
   "main": "main.js",
   "dependencies": {
