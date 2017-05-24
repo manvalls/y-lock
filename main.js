@@ -3,9 +3,10 @@ var Resolver = require('y-resolver'),
     queue = Symbol(),
     amount = Symbol();
 
-class Lock{
+class Lock extends Resolver.Hybrid{
 
   constructor(n){
+    super();
     if(!arguments.length) n = 1;
     else n = fix(n);
 
