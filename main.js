@@ -82,6 +82,14 @@ class Lock extends Resolver.Hybrid{
     return res.yielded;
   }
 
+  get then(){
+    return undefined;
+  }
+
+  after(...args){
+    return super.then(...args);
+  }
+
   get ['3asKNsYzcdGduft'](){
     return 60;
   }
