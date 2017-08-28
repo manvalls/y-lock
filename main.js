@@ -90,7 +90,7 @@ class Lock extends Resolver.Hybrid{
     return super.then(...args);
   }
 
-  get ['3asKNsYzcdGduft'](){
+  get [Symbol.for('ebjs/label')](){
     return 60;
   }
 

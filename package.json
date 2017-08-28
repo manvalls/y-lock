@@ -4,7 +4,7 @@
   "description": "Promise-based semaphore implementation",
   "main": "main.js",
   "dependencies": {
-    "y-resolver": "^10.1.4"
+    "y-resolver": "^11.0.1"
   },
   "repository": {
     "type": "git",
